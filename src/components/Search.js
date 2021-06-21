@@ -12,6 +12,23 @@ export default function Search() {
     // That Second argument controls when our code gets executed, 3 possible arguments, an empty array, an array 
     // with many elements in it or nothing [term, apples] ,[], ‘’
     useEffect(()=>{
+        //valid varaible, the paren at the end invokes the function
+      const search = async () => {
+          //url will go to 
+        await axios.get('https://en.wikipedia.org/w/api.php', {
+            //any valyes written in here will be appended to the end
+            params: {
+                action: 'query',
+                list: 'search',
+                origin: '*',
+                format:'json',
+                srsearcg: term,
+            },
+        });
+      };
+
+      //invoke the above
+      search();
         
     }, [term]);
     return (
