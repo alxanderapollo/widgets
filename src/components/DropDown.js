@@ -4,24 +4,31 @@ export default function DropDown({options, selected, onSelectedChange}) {
     const [open,setOpen] = useState(false);
     const ref = useRef();
 
-    //we are adding a useEffect listener to listen for elements clicked outside of the drop down menu
-    useEffect(() =>{
-        //listening for a onClick event
-        document.body.addEventListener('click',(event)=>{
-        //ref.current.contains (contains specfically belongs to all dom elements) will see if whether or not the item we clicked on is inside of our component
-        if (ref.current.contains(event.target)){
+    useEffect(() => {
+        const onBodyClick = (event) => {
+          if (ref.current.contains(event.target)) {
             return;
-        }
-        //otherwise we should close the drop down menu
-        setOpen(false);
-
-        //console.log(event.target)//refrence the specfic dom element that was specfically clicked
-        //   console.log("Body Clicked")
-        
-        });
-
-    },[]);
-
+          }
+          setOpen(false);
+        };
+        document.body.addEventListener("click", onBodyClick, { capture: true });
+    
+        return () => {
+          document.body.removeEventListener("click", onBodyClick, {
+            capture: true,
+          });
+        };
+      }, []);
+    
+      useEffect(() => {
+        document.body.addEventListener(
+          "click",
+          () => {
+            setOpen(false);
+          },
+          { capture: true }
+        );
+      }, []);
     
 
     const renderedOptions = options.map(option =>{

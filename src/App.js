@@ -36,17 +36,24 @@ const options = [
 
 export default function App() {
     const [selected, setSelected] = useState(options[0]) ;
+    //functionality to toggle whehter or not show the drop down at all
+    const [showDropDown,setShowDropDown] = useState(true);//drop down shows by default
+
     return (
         <div>   
             {/* <Accordion items={items}/> */}
             {/* drop down has 3 diffrent items options, is all the possible colors 
             selected is currently the useEffect param it is pointing at 
             onSelectedChange will change everytime a user chooses a diffrent color*/}
-            <DropDown 
-                selected={selected} 
-                options={options}
-                onSelectedChange={setSelected}
-            />
+
+            <button onClick = {() => setShowDropDown(!showDropDown)}>Toggle Drop Down</button>
+            {showDropDown ? 
+                <DropDown 
+                    selected={selected} 
+                    options={options}
+                    onSelectedChange={setSelected}
+                /> : null
+            }
         </div>
     )
 };
