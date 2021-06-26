@@ -32,7 +32,6 @@ export default function Search() {
       };
     if(term && !results.length){
         search();
-
     }else{
         //we want a few seconds to go before the search starts when a user enters, 500 mili seconds 
         //any additional change should restart the timer, we can use the clear timeout

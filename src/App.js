@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Accordion from './components/Accordion';
 import Search from './components/Search';
 import DropDown from './components/DropDown';
@@ -24,21 +24,29 @@ const options = [
         value: 'red'
     },
     {
-        label: 'The Color Gree',
-        value: 'gree'
+        label: 'The Color Green',
+        value: 'green'
     },
     {
-        label: 'The Color blue',
+        label: 'The Color Blue',
         value: 'blue'
     },
 ]
 
 
 export default function App() {
+    const [selected, setSelected] = useState(options[0]) ;
     return (
         <div>   
             {/* <Accordion items={items}/> */}
-            <DropDown options={options}/>
+            {/* drop down has 3 diffrent items options, is all the possible colors 
+            selected is currently the useEffect param it is pointing at 
+            onSelectedChange will change everytime a user chooses a diffrent color*/}
+            <DropDown 
+                selected={selected} 
+                options={options}
+                onSelectedChange={setSelected}
+            />
         </div>
     )
 };
