@@ -8,6 +8,12 @@ import React from 'react';
 //takes the class name, a link to the routing page 
 export default function Link({className,href, children}) {
     const onClick =( event)=>{
+
+        // if a user is on mac or PC and on mac want to use the command key to open up a new page inside of a new window or ctrl (windows)
+        if(event.metaKey || event.ctrlKey){
+            return;
+        }
+
         // prevents a full page reload
         event.preventDefault();
         //will allow us to change url's without  the need of refreshing a page

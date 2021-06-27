@@ -24,7 +24,5 @@ export default function Route({path, children}) {
 
     //want this function to run only once
     },[]);
-
-
     return  currentPath === path ? children : null;
 }
