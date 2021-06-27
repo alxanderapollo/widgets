@@ -1,20 +1,22 @@
+import Link from './Link'
+//nav
 export default function Header() {
     return (
         <div className="ui secondary pointing menu">
-            <a href="/" className="item">
+            <Link href="/" className="item">
                 Accordion 
-            </a>
-            <a href="/list" className="item">
+            </Link>
+            <Link href="/list" className="item">
                 Search 
-            </a>
+            </Link>
             
-            <a href="/dropdown" className="item">
+            <Link href="/dropdown" className="item">
                 DropDown 
-            </a>
+            </Link>
             
-            <a href="/translate" className="item">
+            <Link href="/translate" className="item">
                 Translate 
-            </a>
+            </Link>
             
         </div>
     )
