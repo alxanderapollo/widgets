@@ -1,5 +1,5 @@
 import React, {useState, useEffect,useRef} from 'react';
-export default function DropDown({options, selected, onSelectedChange}) {
+export default function DropDown({label,options, selected, onSelectedChange}) {
     //piece of state responsible for toggling the drop down menu
     const [open,setOpen] = useState(false);
     const ref = useRef();
@@ -66,7 +66,7 @@ export default function DropDown({options, selected, onSelectedChange}) {
     return (
         <div ref  = {ref} className="ui form">
             <div className="field">
-                <label className="label">Select a Color</label>
+                <label className="label">{label}</label>
                 {/* if open is true set to visiable active meaning drop down the menus other wise close */}
                 <div onClick={() => {
                     // console.log("DropDown Clicked");
