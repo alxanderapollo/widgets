@@ -4,6 +4,19 @@ import axios from 'axios'
 export default function Convert({language, text}) {
 
     const[translated, setTranslated] = useState('');
+    const[debouncedText, setDebouncedText] = useState(text);
+
+    //to prevent making requests everytime a user types in a single character
+    useEffect( () => {
+        const timerID =setTimeout(() =>{
+            setDebouncedText(text);
+        },500);
+        //clean up function
+        return () =>{
+            clearTimeout(timerID);
+        };
+    }, [text]);
+
     useEffect(() => {
         //piece of state that will take the translating and help to output it
         const doTranslation = async () => {
@@ -12,7 +25,7 @@ export default function Convert({language, text}) {
             //destructuring data so we can solely pick at the translation
             const {data} = await axios.post('https://translation.googleapis.com/language/translate/v2',{}, {
                  params: {
-                     q: text,
+                     q: debouncedText,
                      target: language.value,
                      key: 'AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM'
     
@@ -25,7 +38,7 @@ export default function Convert({language, text}) {
         doTranslation(); //runs evertime we make a request with a new language 
 
         //anytime we get a new langauge or text we will run (rerender) that new piece of language
-    }, [language, text]);
+    }, [language, debouncedText]);
     return (
         <div>
             <h1 className="ui header">{translated}</h1>
